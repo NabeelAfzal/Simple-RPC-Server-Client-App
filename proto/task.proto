@@ -1,0 +1,28 @@
+// ************************************************************************* //
+// This file is a part of an exercise developed by xGridTech to explain the
+// functionality and usage of the Google Protobuf-RPC library to a beginner.
+// This is an open source code with no license or copyrights, and can be used,
+// changed, and implemented by anyone for their own purposes.
+//
+// 'task.proto' file contains the messages and services used by the clients
+// and the server to send, receive, and manipulate the inputs into outputs.
+//
+// ************************************************************************* //
+
+package Task;
+
+message Input{
+	required int32 a = 1;
+	required int32 b = 2;
+	required int32 c = 3;
+}
+
+message Output{
+	required int32 Sum = 1;
+	required int32 Product = 2;
+}
+
+service Process{
+	rpc Add (Input) returns (Output);
+	rpc Multiply (Input) returns (Output);
+}
