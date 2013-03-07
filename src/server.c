@@ -21,8 +21,18 @@
 
 #define FilePath "./config_server.txt"
 
-/* A variable argument list function which outputs the errors and exits
-   the program. */
+/************************************************************************
+*  
+* @purpose variable argument list function which outputs the errors and
+* 		     exits the program
+*
+* @param const char    *format        String to be output onto the stdout
+*     
+* @returns none  
+* @notes none
+* @end
+*
+***********************************************************************/
 static void die(const char *format, ...) {
   va_list args;
   va_start(args, format);
@@ -32,7 +42,16 @@ static void die(const char *format, ...) {
   exit(1);
 }
 
-/* Shows proper usage of the program to user in case of any error. */
+/************************************************************************
+*  
+* @purpose function used to show proper usage of the program to the user
+*
+* @param none      
+* @returns none   
+* @notes none
+* @end
+*
+***********************************************************************/
 static void usage(void) {
   die("\nusage: server \n"
        "\n"
@@ -55,7 +74,26 @@ static void usage(void) {
        "\n");
 }
 
-/* Implements the 'add' process to calculate the sum. */
+/******************************************************************************
+*  
+* @purpose function which implements the 'add' process to calculate the sum
+*
+* @param Task__Process_Service    *service   Pointer to structure containing
+*                                            'add' and 'multiply' RPC service
+*                                            functions.
+* @param const Task__Input    *input         Input message defined in the
+*                                            task.proto file which contains
+*                                            the three input integers.
+* @param Task__Output_Closure    closure     Message closure for Output message.
+* @param void    *closure_data               A boolean integer which is used as
+*                                            a flag to check if function has
+*                                            succesfully printed out the sum.
+*                                                 
+* @returns none   
+* @notes none
+* @end
+*
+******************************************************************************/
 static void process__add(Task__Process_Service *service,
                           const Task__Input *input,
                           Task__Output_Closure closure,
@@ -74,7 +112,27 @@ static void process__add(Task__Process_Service *service,
   }
 }
 
-/* Implements the 'multiply' process to calculate the product. */
+/******************************************************************************
+*  
+* @purpose function which implements the 'multiply' process to calculate
+*          the product
+*
+* @param Task__Process_Service    *service   Pointer to structure containing
+*                                            'add' and 'multiply' RPC service
+*                                            functions.
+* @param const Task__Input    *input         Input message defined in the
+*                                            task.proto file which contains
+*                                            the three input integers.
+* @param Task__Output_Closure    closure     Message closure for Output message.
+* @param void    *closure_data               A boolean integer which is used as
+*                                            a flag to check if function has
+*                                            succesfully printed out the sum.
+*                                                 
+* @returns none   
+* @notes none
+* @end
+*
+******************************************************************************/
 static void process__multiply(Task__Process_Service *service,
                           const Task__Input *input,
                           Task__Output_Closure closure,
@@ -96,7 +154,20 @@ static void process__multiply(Task__Process_Service *service,
 /* Initializes the Process service. */
 static Task__Process_Service process = TASK__PROCESS__INIT(process__);
 
-/* Main Function: */
+/************************************************************************
+*  
+* @purpose Main Function
+*
+* @param int    argc              Represents number of arguments passed by
+*                                 user when client executable is run.
+* @param const char*    argv[]    Array which contains the actual argument
+*                                 strings passed by the user.
+*    
+* @returns 0 (SUCCESS) or 1 (FAILURE)
+* @notes none
+* @end
+*
+***********************************************************************/
 int main(int argc, const char* argv[]) {
   /* Initialize the Input message. */
   Task__Input input = TASK__INPUT__INIT;

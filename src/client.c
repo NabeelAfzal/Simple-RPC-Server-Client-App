@@ -23,8 +23,18 @@
 
 #define FilePath "./config_client.txt"
 
-/* A variable argument list function which outputs the errors and exits
-   the program. */
+/************************************************************************
+*  
+* @purpose variable argument list function which outputs the errors and
+* 		     exits the program
+*
+* @param const char    *format        String to be output onto the stdout
+*     
+* @returns none  
+* @notes none
+* @end
+*
+***********************************************************************/
 static void die(const char *format, ...) {
   va_list args;
   va_start(args, format);
@@ -34,7 +44,16 @@ static void die(const char *format, ...) {
   exit(1);
 }
 
-/* Shows proper usage of the program to user in case of any error. */
+/************************************************************************
+*  
+* @purpose function used to show proper usage of the program to the user
+*
+* @param none      
+* @returns none   
+* @notes none
+* @end
+*
+***********************************************************************/
 static void usage(void) {
   die("\nusage: client \n"
        "\n"
@@ -58,10 +77,25 @@ static void usage(void) {
        "\n");
 }
 
-/* User-defined 'add' function which prints the 'Sum' output message. */
+/******************************************************************************
+*  
+* @purpose user-defined 'add' function which prints the 'Sum' output message
+*
+* @param const Task__Output    *outputs      Output message defined in the
+*                                            task.proto file which contains
+*                                            the 'Sum' and 'Product' integers.
+* @param void    *closure_data               A boolean integer which is used as
+*                                            a flag to check if function has
+*                                            succesfully printed out the sum.
+*                                                 
+* @returns none   
+* @notes none
+* @end
+*
+******************************************************************************/
 static void add_inputs(const Task__Output *outputs, void *closure_data) {
   if (outputs == NULL) {
-    /* Close the service by sending NULL. */
+  /* Close the service by sending NULL. */
   * (protobuf_c_boolean *) closure_data = 0;
   } else {
   printf("Sum = %d\n", outputs->sum);
@@ -70,10 +104,26 @@ static void add_inputs(const Task__Output *outputs, void *closure_data) {
   }
 }
 
-/* User-defined 'add' function which prints the 'Multiply' output message. */
+/******************************************************************************
+*  
+* @purpose user-defined 'multiply' function which prints the 'Product'
+*          output message
+*
+* @param const Task__Output    *outputs      Output message defined in the
+*                                            task.proto file which contains
+*                                            the 'Sum' and 'Product' integers.
+* @param void    *closure_data               A boolean integer which is used as
+*                                            a flag to check if function has
+*                                            succesfully printed out the product
+*                                                 
+* @returns none   
+* @notes none
+* @end
+*
+******************************************************************************/
 static void multiply_inputs(const Task__Output *outputs, void *closure_data) {
   if (outputs == NULL) {
-    /* Close the service by sending NULL. */
+  /* Close the service by sending NULL. */
   * (protobuf_c_boolean *) closure_data = 0;
   } else {
   printf("Product = %d\n", outputs->product);
@@ -82,7 +132,20 @@ static void multiply_inputs(const Task__Output *outputs, void *closure_data) {
   }
 }
 
-/* Main Function: */
+/************************************************************************
+*  
+* @purpose Main Function
+*
+* @param int    argc              Represents number of arguments passed by
+*                                 user when client executable is run.
+* @param const char*    argv[]    Array which contains the actual argument
+*                                 strings passed by the user.
+*    
+* @returns 0 (SUCCESS) or 1 (FAILURE)
+* @notes none
+* @end
+*
+***********************************************************************/
 int main(int argc, const char* argv[]) {
   /* Initialize the Input message. */
   Task__Input input = TASK__INPUT__INIT;
