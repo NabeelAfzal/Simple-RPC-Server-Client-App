@@ -26,7 +26,10 @@ OBJ = $(patsubst %,$(OBJDIR)/%,$(OBJECTS))
 
 EXECUTABLES = client server
 
-all: $(SRC) $(OBJ) $(COMSRC) $(COMOBJ) $(DEP) $(EXECUTABLES)
+all: $(OBJDIR) $(SRC) $(OBJ) $(COMSRC) $(COMOBJ) $(DEP) $(EXECUTABLES)
+
+$(OBJDIR):
+	if [ -d $(OBJDIR) ];then echo "Obj directory exists.";else mkdir $(OBJDIR);fi
 
 %: $(OBJDIR)/%.o $(COMOBJ)
 	$(CC) $(LFLAGS) $@ $^ $(LIBFLAGS)
