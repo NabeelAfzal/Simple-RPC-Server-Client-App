@@ -22,14 +22,13 @@ COMMONOBJECTS = $(patsubst %.c,%.o,$(COMMONSOURCES))
 COMOBJ = $(patsubst %,$(OBJDIR)/%,$(COMMONOBJECTS))
 
 OBJECTS = $(patsubst %.c,%.o,$(SOURCES))
-#OBJECTS = $($(SOURCES): .c=.o)
 OBJ = $(patsubst %,$(OBJDIR)/%,$(OBJECTS))
 
-EXECUTABLES = client.exe server.exe
+EXECUTABLES = client server
 
-all: $(SRC) $(OBJ) $(COMOBJ) $(DEP) $(EXECUTABLES)
+all: $(SRC) $(OBJ) $(COMSRC) $(COMOBJ) $(DEP) $(EXECUTABLES)
 
-%.exe: $(OBJDIR)/%.o $(COMOBJ)
+%: $(OBJDIR)/%.o $(COMOBJ)
 	$(CC) $(LFLAGS) $@ $^ $(LIBFLAGS)
 
 $(OBJDIR)/%.o : $(SRCDIR)/%.c $(DEP)
