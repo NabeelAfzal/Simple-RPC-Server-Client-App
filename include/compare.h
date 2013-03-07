@@ -4,8 +4,6 @@
 #ifndef ASSIGNMENT4_COMPARE_H
 #define ASSIGNMENT4_COMPARE_H
 
-#define FilePath "/home/nabeel/Documents/Assignment4/config.txt"
-
 int starts_with(const char *str, const char *prefix);
 
 #endif
